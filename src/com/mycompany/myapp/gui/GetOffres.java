@@ -37,7 +37,7 @@ public class GetOffres extends Form {
      ArrayList offres=serviceOffres.getInstance().getAllOffres();
 private Resources theme;
 private EncodedImage enc;
-private String url="http://localhost:80/shared-web/public/uploads/";
+private String url="http://localhost:80/img/";
     public GetOffres() throws IOException {
         
             
