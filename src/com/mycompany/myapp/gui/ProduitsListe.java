@@ -56,6 +56,9 @@ public class ProduitsListe extends Form{
            } catch (IOException ex) {
                System.out.println(ex.getMessage());           }
         });
+        getToolbar().addCommandToRightBar("back", null, ev->{
+            new homeShared().show();
+        });
      //   getToolbar().addCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());
         //Button addDestination = new Button("Add Destination");
 

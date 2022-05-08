@@ -27,10 +27,13 @@ import com.codename1.ui.Label;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextComponent;
 import com.codename1.ui.URLImage;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.enities.Produits;
+import com.mycompany.myapp.services.ProduitService;
 import com.mycompany.myapp.utils.Statics;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -57,6 +60,9 @@ public class ProduitAjout extends Form {
            } catch (IOException ex) {
                System.out.println(ex.getMessage());           }
         });
+        getToolbar().addCommandToRightBar("back", null, ev->{
+            new homeShared().show();
+        });
      //   getToolbar().addCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());
         //Button addDestination = new Button("Add Destination");
 
@@ -76,10 +82,35 @@ public class ProduitAjout extends Form {
         FontImage.setMaterialIcon(prix.getField().getHintLabel(), FontImage.MATERIAL_LIBRARY_BOOKS);
         
         Button save = new Button("Save");
-        save.addActionListener(e -> {
-            ToastBar.showMessage("Save pressed...", FontImage.MATERIAL_INFO);
+//        save.addActionListener(e -> {
+//            ToastBar.showMessage("Save pressed...", FontImage.MATERIAL_INFO);
+//            
+//        });
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if(((refProd.getText().length()==0)||(designation.getText().length()==0)||(prix.getText().length()==0)||(qteStock.getText().length()==0)))
+                Dialog.show("Alert", "Remplir les champs", "OK","");
+                 else
+                {
+                    Produits prod= new Produits(Integer.parseInt(qteStock.getText()), refProd.getText(), designation.getText() ,Float.parseFloat(prix.getText()));
+                    
+                        if( ProduitService.getInstance().addProd(prod))
+                        {
+                           Dialog.show("Success","Offre Ajouté","OK","");
+                        try {
+                            new GetOffres().show();
+                        } catch (IOException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                        }else
+                            Dialog.show("ERROR", "Server error", "OK","");
+                    
+                    
+                }
+            }
         });
-        
+
         
         Button avatar = new Button("");
         avatar.setUIID("InputAvatar");

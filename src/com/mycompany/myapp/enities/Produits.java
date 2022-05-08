@@ -26,6 +26,14 @@ public class Produits {
         this.prix = prix;
     }
 
+    public Produits(int qteStock, String refProd, String designation, float prix) {
+        this.qteStock = qteStock;
+        this.refProd = refProd;
+        this.designation = designation;
+        this.prix = prix;
+    }
+    
+
     public int getIdProd() {
         return idProd;
     }

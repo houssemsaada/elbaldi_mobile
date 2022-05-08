@@ -20,6 +20,7 @@ import com.codename1.ui.util.Resources;
 import com.codename1.io.Log;
 import com.codename1.ui.Toolbar;
 import com.mycompany.myapp.gui.GetOffres;
+import java.io.IOException;
 
 /**
  *
@@ -32,5 +33,32 @@ public class homeShared extends Form{
          
         setTitle("Liste des Destinations");
         setScrollableY(true);
+        Form hi = new Form("Bienvenue chez shared");
+        
+      
+       
+        
+      
+        hi.getToolbar().addCommandToSideMenu("Liste des offres", theme.getImage("round.png"), e->{
+           try {
+               new GetOffres().show();
+           } catch (IOException ex) {
+               System.out.println(ex.getMessage());           }
+        });
+        hi.getToolbar().addCommandToSideMenu("Liste des produits", theme.getImage("round.png"), e->{
+           try {
+               new ProduitsListe(current).show();
+           } catch (IOException ex) {
+               System.out.println(ex.getMessage());           }
+        });
+        hi.getToolbar().addCommandToSideMenu("Ajouter Produit", theme.getImage("round.png"), e->{
+           try {
+               new ProduitAjout().show();
+           } catch (IOException ex) {
+               System.out.println(ex.getMessage());
+           }
+        });
+   
+        hi.show();
 }
 }

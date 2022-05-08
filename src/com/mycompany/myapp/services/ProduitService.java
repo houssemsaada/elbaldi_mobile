@@ -69,10 +69,10 @@ public class ProduitService {
                 else
                 t.setPrix(Float.parseFloat(obj.get("prix").toString()));
                  //image
-                 if (obj.get("image")==null)
+                 if (obj.get("qte")==null)
                 t.setImage("null");
                 else
-                    t.setImage(obj.get("image").toString());
+                    t.setImage(obj.get("qte").toString());
               produits.add(t);
 
             }
@@ -101,4 +101,26 @@ public class ProduitService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return produits;
     }
+       public boolean addProd(Produits produit) {
+       System.out.println(produit);
+        String url = Statics.BASE_URL + "offres/addOffres_mobile?nom="+ produit.getRefProd()+"&description=" + produit.getDesignation()+"&prix="+produit.getPrix()+"&Qte"+produit.getQteStock();
+        req.setUrl(url);
+        req.setPost(false);
+
+       req.addArgument("nom", produit.getRefProd());
+       req.addArgument("description", produit.getDesignation());
+       req.addArgument("prix", String.valueOf(produit.getPrix()));
+       req.addArgument("Qte", String.valueOf(produit.getQteStock()));
+  
+       req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                System.out.println(new String(req.getResponseData()));
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+   }
 }
