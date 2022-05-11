@@ -29,7 +29,7 @@ import java.io.IOException;
 public class homeShared extends Form{
     Form current;
     private Resources theme;
-      public homeShared() {
+      public homeShared(Form previous) {
          
         setTitle("Liste des Destinations");
         setScrollableY(true);
@@ -47,7 +47,7 @@ public class homeShared extends Form{
         });
         hi.getToolbar().addCommandToSideMenu("Liste des produits", theme.getImage("round.png"), e->{
            try {
-               new ProduitsListe(current).show();
+               new ProduitsListe().show();
            } catch (IOException ex) {
                System.out.println(ex.getMessage());           }
         });

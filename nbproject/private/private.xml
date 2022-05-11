@@ -6,9 +6,11 @@
         <group>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/Input.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/enities/Produits.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/serviceOffres.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/ProduitService.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/MyApplication.java</file>
-            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/GetOffres.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/homeShared.java</file>
+            <file>jar:file:/C:/xampp/htdocs/shared_mobile/lib/CodenameOne_SRC.zip!/com/codename1/io/NetworkManager.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/ProduitAjout.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/ProduitsListe.java</file>
         </group>
