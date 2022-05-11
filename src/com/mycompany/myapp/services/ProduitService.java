@@ -69,10 +69,18 @@ public class ProduitService {
                 else
                 t.setPrix(Float.parseFloat(obj.get("prix").toString()));
                  //image
-                 if (obj.get("qte")==null)
+                 if (obj.get("qteStock")==null)
+                t.setQteStock(0);
+                else
+                 {
+                      float qte = Float.parseFloat(obj.get("qteStock").toString());
+                          t.setQteStock((int)qte);
+                 }
+                   
+                if (obj.get("image")==null)
                 t.setImage("null");
                 else
-                    t.setImage(obj.get("qte").toString());
+                    t.setImage(obj.get("image").toString());
               produits.add(t);
 
             }
@@ -102,8 +110,9 @@ public class ProduitService {
         return produits;
     }
        public boolean addProd(Produits produit) {
-       System.out.println(produit);
-        String url = Statics.BASE_URL + "offres/addOffres_mobile?nom="+ produit.getRefProd()+"&description=" + produit.getDesignation()+"&prix="+produit.getPrix()+"&Qte"+produit.getQteStock();
+       System.out.println(produit.getRefProd());
+        System.out.println(produit.getDesignation());   
+        String url = Statics.BASE_URL + "produit/MobileNewProd?refProd="+ produit.getRefProd()+"&designation=" + produit.getDesignation()+"&prix="+produit.getPrix()+"&Qte"+produit.getQteStock();
         req.setUrl(url);
         req.setPost(false);
 
@@ -116,7 +125,7 @@ public class ProduitService {
             @Override
             public void actionPerformed(NetworkEvent evt) {
                 System.out.println(new String(req.getResponseData()));
-                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                resultOK = req.getResponseCode() == 200;
                 req.removeResponseListener(this);
             }
         });

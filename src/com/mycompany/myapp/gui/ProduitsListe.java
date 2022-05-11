@@ -44,7 +44,7 @@ public class ProduitsListe extends Form{
 
      private String url = "http://127.0.0.1/img/";
      
-    public ProduitsListe(Form previous) throws IOException {
+    public ProduitsListe() throws IOException {
         
             
         setTitle("Liste des Produits");
@@ -57,22 +57,19 @@ public class ProduitsListe extends Form{
                System.out.println(ex.getMessage());           }
         });
         getToolbar().addCommandToRightBar("back", null, ev->{
-            new homeShared().show();
+             this.showBack();
         });
-     //   getToolbar().addCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());
-        //Button addDestination = new Button("Add Destination");
-
-        //add(addDestination);
-        //addDestination.addActionListener(e-> new AddDestinationForm(this).show());        
+  
          for (int i=0;i<ListProd.size();i++){
                 Container destinations=new Container(BoxLayout.y());
                
                 destinations.getUnselectedStyle().setBorder(Border.createLineBorder(1));
                 destinations.getUnselectedStyle().setPadding(50, 50, 250, 250);
-                
+              
                 Produits produit=(Produits)ListProd.get(i);
                 enc = EncodedImage.create("/loading.jpg");
                 Image img=URLImage.createToStorage(enc,url+produit.getImage(),url+produit.getImage());
+           
                 ImageViewer imgv = new ImageViewer(img);
                 Label nom=new Label("RefProd: "+produit.getRefProd());
                 Label description=new Label("Designation: "+produit.getDesignation());
@@ -117,7 +114,7 @@ public class ProduitsListe extends Form{
                    if(deleteResult.get("response").equals("Produit Supprimé")){
                   
                     Dialog.show("Deleted", "Produit supprimé","OK","");
-                    new ProduitsListe(current).show();
+                    new ProduitsListe().show();
                          }
                         } catch(Exception err) {
                     Dialog.show("Error", "Error parsing result", "OK","");

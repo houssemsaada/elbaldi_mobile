@@ -61,7 +61,7 @@ public class ProduitAjout extends Form {
                System.out.println(ex.getMessage());           }
         });
         getToolbar().addCommandToRightBar("back", null, ev->{
-            new homeShared().show();
+            new homeShared(this).show();
         });
      //   getToolbar().addCommandToLeftBar("",FontImage.MATERIAL_ARROW_BACK, e->previous.showBack());
         //Button addDestination = new Button("Add Destination");

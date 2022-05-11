@@ -59,38 +59,33 @@ public class MyApplication {
     }
     
     public void start() {
-       // new homeShared().show();
-       if(current != null){
+        //            new ProduitsListe().show();
+        if(current != null){
             current.show();
             return;
         }
         Form hi = new Form("Bienvenue chez shared");
-        
-      
-       
-        
-      
         hi.getToolbar().addCommandToSideMenu("Liste des offres", theme.getImage("round.png"), e->{
-           try {
-               new GetOffres().show();
-           } catch (IOException ex) {
-               System.out.println(ex.getMessage());           }
+            try {
+                new GetOffres().show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());           }
         });
         hi.getToolbar().addCommandToSideMenu("Liste des produits", theme.getImage("round.png"), e->{
-           try {
-               new ProduitsListe(current).show();
-           } catch (IOException ex) {
-               System.out.println(ex.getMessage());           }
+            try {
+                new ProduitsListe().show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());           }
         });
         hi.getToolbar().addCommandToSideMenu("Ajouter Produit", theme.getImage("round.png"), e->{
-           try {
-               new ProduitAjout().show();
-           } catch (IOException ex) {
-               System.out.println(ex.getMessage());
-           }
+            try {
+                new ProduitAjout().show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         });
-   
         hi.show();
+    
     }
 
     public void stop() {
