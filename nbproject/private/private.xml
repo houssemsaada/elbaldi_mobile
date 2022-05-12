@@ -7,12 +7,23 @@
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/Input.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/enities/Produits.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/serviceOffres.java</file>
-            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/ProduitService.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/utils/Statics.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/res/theme.xml</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/MyApplication.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/homeShared.java</file>
             <file>jar:file:/C:/xampp/htdocs/shared_mobile/lib/CodenameOne_SRC.zip!/com/codename1/io/NetworkManager.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/ProduitAjout.java</file>
             <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/ProduitsListe.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/enities/User.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/SignInForm.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/WalkthruForm.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/ProduitService.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/BaseForm.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/services/ServiceUtilisateur.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/GetOffres.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/ActivateForm.java</file>
+            <file>file:/C:/xampp/htdocs/shared_mobile/src/com/mycompany/myapp/gui/SignUpForm.java</file>
+            <file>jar:file:/C:/xampp/htdocs/shared_mobile/lib/CodenameOne_SRC.zip!/com/codename1/ui/util/Resources.java</file>
         </group>
     </open-files>
 </project-private>

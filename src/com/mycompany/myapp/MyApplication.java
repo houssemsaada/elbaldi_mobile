@@ -22,8 +22,10 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.FlowLayout;
 import com.mycompany.myapp.gui.GetOffres;
 import com.mycompany.myapp.gui.Input;
+import com.mycompany.myapp.gui.SignUpForm;
 import com.mycompany.myapp.gui.ProduitAjout;
 import com.mycompany.myapp.gui.ProduitsListe;
+import com.mycompany.myapp.gui.SignInForm;
 import java.io.IOException;
 
 /**
@@ -34,6 +36,7 @@ public class MyApplication {
 
     private Form current;
     private Resources theme;
+
 
     public void init(Object context) {
         // use two network threads instead of one
@@ -59,32 +62,32 @@ public class MyApplication {
     }
     
     public void start() {
-        //            new ProduitsListe().show();
-        if(current != null){
-            current.show();
-            return;
-        }
-        Form hi = new Form("Bienvenue chez shared");
-        hi.getToolbar().addCommandToSideMenu("Liste des offres", theme.getImage("round.png"), e->{
-            try {
-                new GetOffres().show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());           }
-        });
-        hi.getToolbar().addCommandToSideMenu("Liste des produits", theme.getImage("round.png"), e->{
-            try {
-                new ProduitsListe().show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());           }
-        });
-        hi.getToolbar().addCommandToSideMenu("Ajouter Produit", theme.getImage("round.png"), e->{
-            try {
-                new ProduitAjout().show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        });
-        hi.show();
+       new SignInForm(theme).show();
+//        if(current != null){
+//            current.show();
+//            return;
+//        }
+//        Form hi = new Form("Bienvenue chez shared");
+//        hi.getToolbar().addCommandToSideMenu("Liste des offres", theme.getImage("round.png"), e->{
+//            try {
+//                new GetOffres().show();
+//            } catch (IOException ex) {
+//                System.out.println(ex.getMessage());           }
+//        });
+//        hi.getToolbar().addCommandToSideMenu("Liste des produits", theme.getImage("round.png"), e->{
+//            try {
+//                new ProduitsListe().show();
+//            } catch (IOException ex) {
+//                System.out.println(ex.getMessage());           }
+//        });
+//        hi.getToolbar().addCommandToSideMenu("Ajouter Produit", theme.getImage("round.png"), e->{
+//            try {
+//                new ProduitAjout().show();
+//            } catch (IOException ex) {
+//                System.out.println(ex.getMessage());
+//            }
+//        });
+//        hi.show();
     
     }
 
