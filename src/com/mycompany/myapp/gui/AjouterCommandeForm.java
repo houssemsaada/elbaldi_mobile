@@ -36,7 +36,6 @@ public class AjouterCommandeForm extends Form {
         TextField totalTF = new TextField("", "total");
         TextField idPanierTF = new TextField("", "panier id");
         Picker date = new Picker();
-
         Button btnValider = new Button("Add commande");
 
         btnValider.addActionListener(new ActionListener() {
