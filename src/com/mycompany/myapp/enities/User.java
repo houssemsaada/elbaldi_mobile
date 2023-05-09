@@ -13,19 +13,11 @@ import java.util.Date;
  */
 public class User {
     
-    private int cin;
     private String nom;
     private String prenom;
     private String email;
     private String password;
 
-    public int getCin() {
-        return cin;
-    }
-
-    public void setCin(int cin) {
-        this.cin = cin;
-    }
 
     public String getNom() {
         return nom;
@@ -61,11 +53,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "cin=" + cin + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password=" + password + '}';
+        return "User{" + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", password=" + password + '}';
     }
 
-    public User(int cin, String nom, String prenom, String email, String password) {
-        this.cin = cin;
+    public User( String nom, String prenom, String email, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;

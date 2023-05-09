@@ -38,7 +38,7 @@ import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.services.ServiceUtilisateur;
 import com.sun.mail.smtp.SMTPTransport;
 import java.util.Date;
-import java.util.Properties;
+//import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -60,7 +60,7 @@ public class ActivateForm extends BaseForm {
         getTitleArea().setUIID("Container");
         Form previous = Display.getInstance().getCurrent();
         tb.setBackCommand("", e -> previous.showBack());
-        setUIID("SignIn");
+        setUIID("azdadazzz");
         
         add(BorderLayout.NORTH, 
                 BoxLayout.encloseY(
@@ -100,12 +100,11 @@ public class ActivateForm extends BaseForm {
             InfiniteProgress ip = new InfiniteProgress();
             
             final Dialog ipDialog =  ip.showInfiniteBlocking();
-            
             //houni bch nzido API SEND MAIL autrement bch n3ayto lel function ta3o mais 9bal njibo image oublier.png
-            
-            sendMail(res);
+             ServiceUtilisateur.getInstance().sms(email,res);
+           // sendMail(res);
             ipDialog.dispose();
-            Dialog.show("Mot de passe","Nous avons envoyé le mot de passe a votre e-mail. Veuillez vérifier votre boite de réception",new Command("OK"));
+            Dialog.show("Mot de passe","Vous receverez un nouveau mot de passe sur votre téléphone . Veuillez vérifier votre boite de réception",new Command("OK"));
             new SignInForm(res).show();
             refreshTheme();
             
@@ -117,7 +116,8 @@ public class ActivateForm extends BaseForm {
     
     //sendMail
     
-    public void sendMail(Resources res) {
+ /*
+public void sendMail(Resources res) {
         try {
             
             Properties props = new Properties();
@@ -127,7 +127,7 @@ public class ActivateForm extends BaseForm {
              
             Session session = Session.getInstance(props,null); 
             
-            
+             
             MimeMessage msg = new MimeMessage(session);
             
             msg.setFrom(new InternetAddress("Reintialisation mot de passe <monEmail@domaine.com>"));
@@ -143,7 +143,7 @@ public class ActivateForm extends BaseForm {
            
           SMTPTransport  st = (SMTPTransport)session.getTransport("smtps") ;
             
-          st.connect("smtp.gma  il.com",465,"TNSharedInc@gmail.com","shared2022");
+          st.connect("smtp.gmail.com",465,"TNSharedInc@gmail.com","shared2022");
            
           st.sendMessage(msg, msg.getAllRecipients());
             
@@ -153,5 +153,6 @@ public class ActivateForm extends BaseForm {
             e.printStackTrace();
         }
     }
+*/
     
 }

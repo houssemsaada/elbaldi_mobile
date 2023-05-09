@@ -51,17 +51,17 @@ public class ServiceUtilisateur {
     }
     
     //Signup
-    public void signup(TextField username,TextField cin,TextField prenom,TextField password,TextField email,TextField confirmPassword , Resources res ) {
+    public void signup(TextField username,TextField prenom,TextField password,TextField email,TextField confirmPassword , Resources res ) {
         
      
         
-        String url = "http://localhost:8000/registerApi?Nom="+username.getText().toString()+"&Cin="+cin.getText().toString()+"&Prenom="+prenom.getText().toString()+
+        String url = "http://127.0.0.1:8000/registerApi?Nom="+username.getText().toString()+"&Prenom="+prenom.getText().toString()+
                 "&email="+email.getText().toString()+"&Password="+password.getText().toString();
         
         req.setUrl(url);
        
         //Control saisi
-        if(username.getText().equals(" ") && password.getText().equals(" ") && email.getText().equals(" ")&& cin.getText().equals(" ")&& prenom.getText().equals(" ")) {
+        if(username.getText().equals(" ") && password.getText().equals(" ") && email.getText().equals(" ")&& prenom.getText().equals(" ")) {
             
             Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
             
@@ -92,7 +92,11 @@ public class ServiceUtilisateur {
     public void signin(TextField email,TextField password, Resources rs ) {
         
         
-        String url = "http://localhost:8000/loginApiTest?email="+email.getText().toString()+"&password="+password.getText().toString();
+        String url = "http://127.0.0.1:8000/loginApiTest?email="+email.getText().toString()+"&password="+password.getText().toString();
+        
+        System.out.println(email.getText().toString());
+        System.out.println(password.getText().toString());
+
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
@@ -115,12 +119,12 @@ public class ServiceUtilisateur {
                 
                 
              
-                //Session 
-                float cin = Float.parseFloat(user.get("cin").toString());
-              SessionManager.setId((int)cin);//jibt id ta3 user ly3ml login w sajltha fi session ta3i
-               SessionManager.setPassowrd(user.get("password").toString());
-                SessionManager.setUserName(user.get("username").toString());
+                //Session jibt id ta3 user ly3ml login w sajltha fi session ta3i
+                
+                SessionManager.setUserName(user.get("nom").toString());
                 SessionManager.setEmail(user.get("email").toString());
+                
+                System.out.println("current user"+SessionManager.getEmail()+","+SessionManager.getPassowrd());
           
                 if(user.size() >0 ) // l9a user
                     new ProfileForm(rs).show();
@@ -140,7 +144,27 @@ public class ServiceUtilisateur {
         NetworkManager.getInstance().addToQueueAndWait(req);
     }
     
+    public void sms(TextField email, Resources rs ) {
+        
+        
+        String url = "http://127.0.0.1:8000/forgetPasswordApi?email="+email.getText().toString();
+        req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
+        req.setUrl(url);
+        
+        req.addResponseListener((e) ->{
+            
+            JSONParser j = new JSONParser();
+            
+            String json = new String(req.getResponseData()) + ""; 
+            
 
+        });
+    
+         //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+        NetworkManager.getInstance().addToQueueAndWait(req);
+
+    }
+    
   //heki 5dmtha taw nhabtha ala description
     public String getPasswordByEmail(String email, Resources rs ) {
         
@@ -154,24 +178,7 @@ public class ServiceUtilisateur {
             JSONParser j = new JSONParser();
             
              json = new String(req.getResponseData()) + "";
-            
-            
-            try {
-            
-          
-                System.out.println("data =="+json);
-                
-                Map<String,Object> password = j.parseJSON(new CharArrayReader(json.toCharArray()));
-                
-                
-            
-            
-            }catch(Exception ex) {
-                ex.printStackTrace();
-            }
-            
-            
-            
+ 
         });
     
          //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.

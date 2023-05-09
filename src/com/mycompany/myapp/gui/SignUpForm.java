@@ -47,10 +47,9 @@ public class SignUpForm extends BaseForm {
         getTitleArea().setUIID("Container");
         Form previous = Display.getInstance().getCurrent();
         tb.setBackCommand("", e -> previous.showBack());
-        setUIID("SignUp");
+        setUIID("azdadazzz");
                 
         TextField username = new TextField("", "Username", 20, TextField.ANY);
-        TextField cin = new TextField("", "cin", 8, TextField.ANY);
         TextField prenom = new TextField("", "prenom", 20, TextField.ANY);
         TextField email = new TextField("", "E-Mail", 20, TextField.EMAILADDR);
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD);
@@ -75,8 +74,6 @@ public class SignUpForm extends BaseForm {
                 new Label("Sign Up", "LogoLabel"),
                 new FloatingHint(username),
                 createLineSeparator(),
-                new FloatingHint(cin),
-                createLineSeparator(),
                 new FloatingHint(prenom),
                 createLineSeparator(),
                 new FloatingHint(email),
@@ -95,7 +92,7 @@ public class SignUpForm extends BaseForm {
         next.requestFocus();
         next.addActionListener((e) -> {
             
-            ServiceUtilisateur.getInstance().signup(username,cin, prenom,password ,email , confirmPassword, res);
+            ServiceUtilisateur.getInstance().signup(username, prenom,password ,email , confirmPassword, res);
             Dialog.show("Success","account is saved","OK",null);
             new SignInForm(res).show();
         });

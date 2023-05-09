@@ -44,7 +44,7 @@ public class SignInForm extends BaseForm {
             bl.defineLandscapeSwap(BorderLayout.SOUTH, BorderLayout.CENTER);
         }
         getTitleArea().setUIID("Container");
-        setUIID("SignUp");
+        setUIID("azdadazzz");
         
         add(BorderLayout.NORTH, new Label(res.getImage("Logo.png"), "LogoLabel"));
         
@@ -55,19 +55,12 @@ public class SignInForm extends BaseForm {
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
         
-        //mp oublié
         Button  mp = new Button("oublier mot de passe?","CenterLabel");
         
         
         signUp.addActionListener(e -> new SignUpForm(res).show());
         signUp.setUIID("Link");
         Label doneHaveAnAccount = new Label("Vous n'avez aucune compte?");
-        
-        
-        
-        
-        
-        
         Container content = BoxLayout.encloseY(
                 new FloatingHint(username),
                 createLineSeparator(),

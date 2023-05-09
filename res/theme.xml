@@ -597,10 +597,6 @@
         <val key="SideNavigationPanel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.padding" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.transparency" value="255" />
-        <val key="SignIn.bgImage" value="BACKGROUND.jpg" />
-        <val key="SignIn.bgType" value="2" />
-        <val key="SignUp.bgImage" value="BACKGROUND.jpg" />
-        <val key="SignUp.bgType" value="2" />
         <gradient key="Slider.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
         <val key="Slider.bgType" value="0" />
         <border key="Slider.border" type="imageH" i1="sliderEmptyLeft.png" i2="sliderEmptyRight.png" i3="sliderEmpty.png" />
@@ -745,6 +741,8 @@
         <font key="ToastBarMessage.font" type="ttf" face="0" style="0" size="0" name="native:MainThin" family="native:MainThin" sizeSettings="3" actualSize="3.0" />
         <val key="ToastBarMessage.padUnit" value="2,2,2,2" />
         <val key="ToastBarMessage.padding" value="2.0,2.0,1.0,1.0" />
+        <val key="azdadazzz.bgImage" value="Untitled-1.jpg" />
+        <val key="azdadazzz.bgType" value="1" />
         <val key="bgColor" value="ffffff" />
         <border key="border" type="empty" />
         <val key="fgColor" value="0" />
@@ -762,4 +760,5 @@
     <image name="TitleArea.borderTop_1.png" type="multi"  />
     <image name="TitleArea.borderTopL_1.png" type="multi"  />
     <image name="TitleArea.borderTopR_1.png" type="multi"  />
+    <image name="Untitled-1.jpg"  />
 </resource>

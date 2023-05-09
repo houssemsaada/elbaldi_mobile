@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="shared_mobilee">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/shared_mobilee.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
