@@ -25,7 +25,7 @@ public class ModifierQuiz extends Form {
     Quiz currentQuiz;
 
     TextField nomTF;
-    TextField difficulteTF;
+  ComboBox<String> difficulteTF;
     Label nomLabel;
     Label difficulteLabel;
     Label imageLabel;
@@ -60,11 +60,15 @@ public class ModifierQuiz extends Form {
         nomTF.setHint("Tapez le nom");
 
 
-        difficulteLabel = new Label("Difficulte : ");
+         difficulteLabel = new Label("Difficulte : ");
         difficulteLabel.setUIID("labelDefault");
-        difficulteTF = new TextField();
-        difficulteTF.setHint("Tapez le difficulte");
+        String[] difficulteOptions = {"Facile", "Moyenne", "Difficile"};
+        difficulteTF = new ComboBox<>(difficulteOptions); // Utilisation de ComboBox
 
+        // Récupérer la valeur sélectionnée dans le ComboBox
+        String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
+
+       
 
 
         imageLabel = new Label("Image : ");
@@ -72,7 +76,8 @@ public class ModifierQuiz extends Form {
         selectImageButton = new Button("Ajouter une image");
 
         nomTF.setText(currentQuiz.getNom());
-        difficulteTF.setText(currentQuiz.getDifficulte());
+       difficulteTF.setSelectedItem(currentQuiz.getDifficulte());
+
 
 
         if (currentQuiz.getImage() != null) {
@@ -123,11 +128,12 @@ public class ModifierQuiz extends Form {
 
         manageButton.addActionListener(action -> {
             if (controleDeSaisie()) {
+                String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
                 int responseCode = QuizService.getInstance().edit(
                         new Quiz(
                                 currentQuiz.getId(),
                                 nomTF.getText(),
-                                difficulteTF.getText(),
+                                 difficulteSelectionnee,
                                 selectedImage
 
                         ), imageEdited
@@ -156,7 +162,7 @@ public class ModifierQuiz extends Form {
         }
 
 
-        if (difficulteTF.getText().equals("")) {
+       if (difficulteTF.getSelectedItem() == null || difficulteTF.getSelectedItem().toString().equals(""))   {
             Dialog.show("Avertissement", "Difficulte vide", new Command("Ok"));
             return false;
         }
@@ -167,14 +173,16 @@ public class ModifierQuiz extends Form {
             return false;
         }
 
-         ArrayList<Quiz> listQuizs = QuizService.getInstance().getAll();
-       
-         for (Quiz quiz :  listQuizs) {
-        if (quiz.getNom().equals(nomTF.getText())) {
-            Dialog.show("Avertissement", "Le nom doit être unique", new Command("Ok"));
-            return false;
-        }}
 
+ArrayList<Quiz> listQuizs = QuizService.getInstance().getAll();
+for (Quiz quiz : listQuizs) {
+     if (quiz.getNom().equals(nomTF.getText()) && quiz.getId() != currentQuiz.getId()) {
+        Dialog.show("Avertissement", "Le nom doit être unique", new Command("Ok"));
+        return false;
+    }
+}
+
+   
         return true;
     }
 }

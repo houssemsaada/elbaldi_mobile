@@ -27,27 +27,17 @@ public class ProfileForm extends BaseForm {
         });
 
 
-        Image img = res.getImage("profile-background.jpg");
-        if (img.getHeight() > Display.getInstance().getDisplayHeight() / 3) {
-            img = img.scaledHeight(Display.getInstance().getDisplayHeight() / 3);
-        }
-        ScaleImageLabel sl = new ScaleImageLabel(img);
-        sl.setUIID("BottomPad");
-        sl.setBackgroundType(Style.BACKGROUND_IMAGE_SCALED_FILL);
+        
 
-        Label facebook = new Label("786 followers", res.getImage("facebook-logo.png"), "BottomPad");
-        Label twitter = new Label("486 followers", res.getImage("twitter-logo.png"), "BottomPad");
-        facebook.setTextPosition(BOTTOM);
-        twitter.setTextPosition(BOTTOM);
+        
 
         add(LayeredLayout.encloseIn(
-                sl,
+              
                 BorderLayout.south(
                         GridLayout.encloseIn(3,
-                                facebook,
                                 FlowLayout.encloseCenter(
-                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond")),
-                                twitter
+                                        new Label(res.getImage("profile-pic.jpg"), "PictureWhiteBackgrond"))
+                                
                         )
                 )
         ));

@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class AjouterQuestion extends Form {
 
 
-    TextField difficulteTF;
+ 
     TextField questionnTF;
     TextField reponse1TF;
     TextField reponse2TF;
     TextField reponse3TF;
     TextField solutionTF;
+ 
+       ComboBox<String> difficulteTF;
     Label difficulteLabel;
     Label questionnLabel;
     Label reponse1Label;
@@ -67,40 +69,47 @@ public class AjouterQuestion extends Form {
         }
 
 
-        difficulteLabel = new Label("Difficulte : ");
+       difficulteLabel = new Label("Difficulte : ");
         difficulteLabel.setUIID("labelDefault");
-        difficulteTF = new TextField();
-        difficulteTF.setHint("Tapez le difficulte");
+        String[] difficulteOptions = {"Facile", "Moyenne", "Difficile"};
+        difficulteTF = new ComboBox<>(difficulteOptions); // Utilisation de ComboBox
+
+        // Récupérer la valeur sélectionnée dans le ComboBox
+        String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
+
+       
+
+ 
 
 
         questionnLabel = new Label("Questionn : ");
         questionnLabel.setUIID("labelDefault");
         questionnTF = new TextField();
-        questionnTF.setHint("Tapez le questionn");
+        questionnTF.setHint("Tapez la question");
 
 
-        reponse1Label = new Label("Reponse1 : ");
+        reponse1Label = new Label("Réponse1 : ");
         reponse1Label.setUIID("labelDefault");
         reponse1TF = new TextField();
-        reponse1TF.setHint("Tapez le reponse1");
+        reponse1TF.setHint("Tapez la réponse 1");
 
 
-        reponse2Label = new Label("Reponse2 : ");
+        reponse2Label = new Label("Réponse2 : ");
         reponse2Label.setUIID("labelDefault");
         reponse2TF = new TextField();
-        reponse2TF.setHint("Tapez le reponse2");
+        reponse2TF.setHint("Tapez la réponse 2");
 
 
-        reponse3Label = new Label("Reponse3 : ");
+        reponse3Label = new Label("Réponse 3 : ");
         reponse3Label.setUIID("labelDefault");
         reponse3TF = new TextField();
-        reponse3TF.setHint("Tapez le reponse3");
+        reponse3TF.setHint("Tapez la réponse 3");
 
 
         solutionLabel = new Label("Solution : ");
         solutionLabel.setUIID("labelDefault");
         solutionTF = new TextField();
-        solutionTF.setHint("Tapez le solution");
+        solutionTF.setHint("Tapez la solution");
 
 
         manageButton = new Button("Ajouter");
@@ -129,12 +138,11 @@ public class AjouterQuestion extends Form {
 
         manageButton.addActionListener(action -> {
             if (controleDeSaisie()) {
+                 String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
                 int responseCode = QuestionService.getInstance().add(
                         new Question(
-
-
                                 selectedQuiz,
-                                difficulteTF.getText(),
+                                difficulteSelectionnee,
                                 questionnTF.getText(),
                                 reponse1TF.getText(),
                                 reponse2TF.getText(),
@@ -143,7 +151,7 @@ public class AjouterQuestion extends Form {
                         )
                 );
                 if (responseCode == 200) {
-                    Dialog.show("Succés", "Question ajouté avec succes", new Command("Ok"));
+                    Dialog.show("Succés", "Question ajouté avec succés", new Command("Ok"));
                     showBackAndRefresh();
                 } else {
                     Dialog.show("Erreur", "Erreur d'ajout de question. Code d'erreur : " + responseCode, new Command("Ok"));
@@ -160,8 +168,8 @@ public class AjouterQuestion extends Form {
     private boolean controleDeSaisie() {
 
 
-        if (difficulteTF.getText().equals("")) {
-            Dialog.show("Avertissement", "Difficulte vide", new Command("Ok"));
+        if (difficulteTF.getSelectedItem() == null || difficulteTF.getSelectedItem().toString().equals(""))  {
+            Dialog.show("Avertissement", "Difficulté vide", new Command("Ok"));
             return false;
         }
 

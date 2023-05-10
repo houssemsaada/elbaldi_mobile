@@ -12,6 +12,7 @@ import com.eratech.services.QuizService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.scene.control.ChoiceBox;
 
 public class AjouterQuiz extends Form {
 
@@ -22,7 +23,8 @@ public class AjouterQuiz extends Form {
 
 
     TextField nomTF;
-    TextField difficulteTF;
+   
+      ComboBox<String> difficulteTF;
     Label nomLabel;
     Label difficulteLabel;
     Label imageLabel;
@@ -55,14 +57,21 @@ public class AjouterQuiz extends Form {
         nomTF.setHint("Tapez le nom");
 
 
-        difficulteLabel = new Label("Difficulte : ");
+       /* difficulteLabel = new Label("Difficulte : ");
         difficulteLabel.setUIID("labelDefault");
         difficulteTF = new TextField();
-        difficulteTF.setHint("Tapez le difficulte");
+        difficulteTF.setHint("Tapez le difficulte"); */
+       difficulteLabel = new Label("Difficulte : ");
+        difficulteLabel.setUIID("labelDefault");
+        String[] difficulteOptions = {"Facile", "Moyenne", "Difficile"};
+        difficulteTF = new ComboBox<>(difficulteOptions); // Utilisation de ComboBox
 
-        
+        // Récupérer la valeur sélectionnée dans le ComboBox
+        String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
 
-  
+       
+
+ 
 
         imageLabel = new Label("Image : ");
         imageLabel.setUIID("labelDefault");
@@ -104,10 +113,11 @@ public class AjouterQuiz extends Form {
 
         manageButton.addActionListener(action -> {
             if (controleDeSaisie()) {
+                   String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
                 int responseCode = QuizService.getInstance().add(
                         new Quiz(
                                 nomTF.getText(),
-                                difficulteTF.getText(),
+                                 difficulteSelectionnee,
                                 selectedImage
                         )
                 );
@@ -135,7 +145,7 @@ public class AjouterQuiz extends Form {
         }
 
 
-        if (difficulteTF.getText().equals("")) {
+    if (difficulteTF.getSelectedItem() == null || difficulteTF.getSelectedItem().toString().equals(""))    {
             Dialog.show("Avertissement", "Difficulté vide", new Command("Ok"));
             return false;
         }
@@ -145,7 +155,7 @@ public class AjouterQuiz extends Form {
             Dialog.show("Avertissement", "Veuillez choisir une image", new Command("Ok"));
             return false;
         }
-  
+ 
         ArrayList<Quiz> listQuizs = QuizService.getInstance().getAll();
        
          for (Quiz quiz :  listQuizs) {

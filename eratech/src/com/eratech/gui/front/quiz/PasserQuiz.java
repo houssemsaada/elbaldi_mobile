@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class PasserQuiz extends Form {
 
@@ -35,7 +36,7 @@ public class PasserQuiz extends Form {
     Form previous;
     Map<String, ButtonGroup> reponses = new HashMap<>();
     int list;
-    
+   
     public PasserQuiz(Form previous) {
         super("Quiz", new BoxLayout(BoxLayout.Y_AXIS));
         this.previous = previous;
@@ -56,7 +57,7 @@ public class PasserQuiz extends Form {
         nomLabel.setUIID("labelDefault");
 
         listQuestions = QuestionService.getInstance().getAll();
-        
+       
 
 
         if (currentQuiz.getImage() != null) {
@@ -166,12 +167,21 @@ public class PasserQuiz extends Form {
             }
         }
         btnPartager.setImageToShare(path, "image/png");
+       
+        String codePromo = "";
+if (score == 5 || (score < 5 && score > 3)) {
+    codePromo = "Elbaldi" + generatePromoCode();
+}
         if (score <2) {
-            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été échoué avec un score de " + score + "/" + list);
-        } else {
-            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succes avec un score de " + score + "/" + list);
-            
-        }
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été échoué par"+" foulen foulani "+" avec un score de " + score + "/" + list);
+        } else if (score ==5)  {
+           
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés  par"+" foulen foulani "+"avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo :  " + codePromo);
+          }   else if (score < 5 && score >3)  {
+                     
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés par"+" foulen foulani "+" avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo : " + codePromo);
+                     }
+       
 
         this.removeAll();
         this.revalidate();
@@ -181,10 +191,24 @@ public class PasserQuiz extends Form {
 
         if (score <2) {
             Dialog.show("Echec", "Vous avez échoué le quiz avec un score de " + score + "/" + list, new Command("Ok"));
-        } else {
-           Dialog.show("Félicitation", "Vous avez passé le quiz avec un score de " + score + "/" + list, new Command("Ok"));
-            
-        }
-
+        } else if (score ==5)  {
+           
+           Dialog.show("Félicitation", "Vous avez passé le quiz avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo : " + codePromo, new Command("Ok"));
+        }  else if (score < 5 && score >3)  {
+           
+           Dialog.show("Félicitation", "Vous avez passé le quiz avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo :  " + codePromo, new Command("Ok"));
+ }
     }
+   
+    private String generatePromoCode() {
+    final int length = 5;
+    final String chars = "0123456789";
+    Random random = new Random();
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < length; i++) {
+        sb.append(chars.charAt(random.nextInt(chars.length())));
+    }
+    return sb.toString();
+}
+
 }

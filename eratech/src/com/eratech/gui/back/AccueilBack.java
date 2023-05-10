@@ -38,8 +38,15 @@ public class AccueilBack extends Form {
         Container menuContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         menuContainer.addAll(
                 userContainer,
+                makeProduitsButton(),
+                makeCategoriesButton(),
                 makeQuestionsButton(),
-                makeQuizsButton()
+                makeQuizsButton(),
+                 makeBonplansButton(),
+                makeReservationsButton(),
+                 makeCommandesButton()
+
+                 
 
         );
 
@@ -59,6 +66,45 @@ public class AccueilBack extends Form {
         button.setUIID("buttonMenu");
         //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
         button.addActionListener(action -> new com.eratech.gui.back.quiz.AfficherToutQuiz(this).show());
+        return button;
+    }
+      private Button makeProduitsButton() {
+        Button button = new Button("Produits");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.back.produit.AfficherToutProduit(this).show());
+        return button;
+    }
+
+
+    private Button makeCategoriesButton() {
+        Button button = new Button("Catégories");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.back.categorie.AfficherToutCategorie(this).show());
+        return button;
+    }
+    
+       private Button makeBonplansButton() {
+        Button button = new Button("Bonplans");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.back.bonplan.AfficherToutBonplan(this).show());
+        return button;
+    }
+
+    private Button makeReservationsButton() {
+        Button button = new Button("Reservations");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.back.reservation.AfficherToutReservation(this).show());
+        return button;
+    }
+     private Button makeCommandesButton() {
+        Button button = new Button("Commandes");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.commande.AfficherCommandeForm(this).show());
         return button;
     }
 

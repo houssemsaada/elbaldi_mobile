@@ -15,12 +15,13 @@ public class ModifierQuestion extends Form {
 
     Question currentQuestion;
 
-    TextField difficulteTF;
+   
     TextField questionnTF;
     TextField reponse1TF;
     TextField reponse2TF;
     TextField reponse3TF;
     TextField solutionTF;
+    ComboBox<String> difficulteTF;
     Label difficulteLabel;
     Label questionnLabel;
     Label reponse1Label;
@@ -73,8 +74,12 @@ public class ModifierQuestion extends Form {
 
         difficulteLabel = new Label("Difficulte : ");
         difficulteLabel.setUIID("labelDefault");
-        difficulteTF = new TextField();
-        difficulteTF.setHint("Tapez le difficulte");
+        String[] difficulteOptions = {"Facile", "Moyenne", "Difficile"};
+        difficulteTF = new ComboBox<>(difficulteOptions); // Utilisation de ComboBox
+
+        // Récupérer la valeur sélectionnée dans le ComboBox
+        String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
+
 
 
         questionnLabel = new Label("Questionn : ");
@@ -106,8 +111,8 @@ public class ModifierQuestion extends Form {
         solutionTF = new TextField();
         solutionTF.setHint("Tapez le solution");
 
-
-        difficulteTF.setText(currentQuestion.getDifficulte());
+difficulteTF.setSelectedItem(currentQuestion.getDifficulte());
+       
         questionnTF.setText(currentQuestion.getQuestionn());
         reponse1TF.setText(currentQuestion.getReponse1());
         reponse2TF.setText(currentQuestion.getReponse2());
@@ -127,7 +132,7 @@ public class ModifierQuestion extends Form {
         container.addAll(
 
 
-                difficulteLabel, difficulteTF,
+               difficulteLabel, difficulteTF,
                 questionnLabel, questionnTF,
                 reponse1Label, reponse1TF,
                 reponse2Label, reponse2TF,
@@ -144,13 +149,14 @@ public class ModifierQuestion extends Form {
 
         manageButton.addActionListener(action -> {
             if (controleDeSaisie()) {
+                 String difficulteSelectionnee = (String) difficulteTF.getSelectedItem();
                 int responseCode = QuestionService.getInstance().edit(
                         new Question(
                                 currentQuestion.getId(),
 
 
                                 selectedQuiz,
-                                difficulteTF.getText(),
+                                difficulteSelectionnee,
                                 questionnTF.getText(),
                                 reponse1TF.getText(),
                                 reponse2TF.getText(),
@@ -177,7 +183,7 @@ public class ModifierQuestion extends Form {
     private boolean controleDeSaisie() {
 
 
-        if (difficulteTF.getText().equals("")) {
+       if (difficulteTF.getSelectedItem() == null || difficulteTF.getSelectedItem().toString().equals("")) {
             Dialog.show("Avertissement", "Difficulte vide", new Command("Ok"));
             return false;
         }
@@ -220,7 +226,7 @@ public class ModifierQuestion extends Form {
 
  ArrayList<Question> listQuestions = QuestionService.getInstance().getAll();
          for (Question question :  listQuestions) {
-        if (question.getQuestionn().equals(questionnTF.getText())) {
+        if (question.getQuestionn().equals(questionnTF.getText()) && question.getId() != currentQuestion.getId()) {
             Dialog.show("Avertissement", "Cette question existe déja", new Command("Ok"));
             return false;
         }}
