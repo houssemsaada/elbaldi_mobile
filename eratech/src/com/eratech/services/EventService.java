@@ -64,9 +64,10 @@ public class EventService {
         String description_event = t.getDescription_event();
         String organisation = t.getOrganisation();
         Date time_event = t.getTime_event();
-
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(time_event);
         //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        String url = Statics.BASE_URL2 + "event/newmobile?" + "title_event=" + title_event + "&description_event=" + description_event + "&organisation=" + organisation + "&time_event=" + time_event;
+        String url = Statics.BASE_URL2 + "event/newmobile?" + "title_event=" + title_event + "&description_event=" + description_event + "&organisation=" + organisation + "&time_event=" + dateString;
 
         req.setUrl(url);
         req.setPost(false);

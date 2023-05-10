@@ -19,6 +19,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.spinner.Picker;
 import com.eratech.entities.commande;
 import com.eratech.entities.panier;
+import com.eratech.gui.utilisateur.SessionManager;
 import com.eratech.services.commandeService;
 
 
@@ -32,25 +33,24 @@ public class AjouterCommandeForm extends Form {
         setTitle("Add a new commande");
         setLayout(BoxLayout.y());
 
-        TextField etatTF = new TextField("", "Etat");
+         TextField nomF = new TextField("","nom");
+         nomF.setText(SessionManager.getUserName());
         TextField adresseTF = new TextField("", "adresse");
-        TextField totalTF = new TextField("", "total");
-        TextField idPanierTF = new TextField("", "panier id");
+
         Picker date = new Picker();
         Button btnValider = new Button("Add commande");
 
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                if ((etatTF.getText().length() == 0) || (adresseTF.getText().length() == 0) || (totalTF.getText().length() == 0) || (idPanierTF.getText().length() == 0)) {
+                if (adresseTF.getText().length() == 0) {
                     Dialog.show("Alert", "Please fill all the fields", new Command("OK"));
                 } else {
                     try {
-                        panier p = new panier();
-                        p.setId_panier(Integer.parseInt(idPanierTF.getText()));
-                        commande c = new commande(p, etatTF.getText(), date.getDate());
+                      
+                        commande c = new commande();
                         c.setAdresse(adresseTF.getText());
-                        c.setTotal(Float.parseFloat(totalTF.getText()));
+                        c.setDate_cmd(date.getDate());
                         if (commandeService.getInstance().addcommande(c)) {
                             Dialog.show("Success", "commande ajoutée ", new Command("OK"));
                         } else {
@@ -65,7 +65,7 @@ public class AjouterCommandeForm extends Form {
             }
         });
 
-        addAll(etatTF, adresseTF,totalTF,idPanierTF,date, btnValider);
+        addAll( nomF,adresseTF,date, btnValider);
         getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e -> previous.showBack());
 
     }

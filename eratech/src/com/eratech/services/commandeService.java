@@ -28,6 +28,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.eratech.entities.commande;
 import com.eratech.entities.panier;
+import com.eratech.gui.utilisateur.SessionManager;
 import com.eratech.utils.Statics;
 
 import java.io.IOException;
@@ -35,9 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
-
-
-
 
 /**
  *
@@ -65,18 +63,18 @@ public class commandeService {
     public boolean addcommande(commande t) {
 
         String adresse = t.getAdresse();
-        String etat = t.getEtat();
+        String etat = "En attente";
         Float total = t.getTotal();
         Date datecmd = t.getDate_cmd();
-        panier p = t.getPan();
-                
-        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = dateFormat.format(datecmd);
+
         //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        String url = Statics.BASE_URL2 + "commande/addcommandeJSON?"+"adresse="+adresse+"&etat="+etat+"&total="+total+"&DateCmd="+datecmd+"&IdPanier="+p.getId_panier();
+        String url = Statics.BASE_URL2 + "commande/addcommandeJSON?" + "adresse=" + adresse + "&etat=" + etat + "&total=" + total + "&DateCmd=" + dateString + "&IdPanier=" + SessionManager.getId();
 
         req.setUrl(url);
         req.setPost(false);
-        
+
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
@@ -87,17 +85,15 @@ public class commandeService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
-     public boolean supprimercommande(commande t) {
 
-       
-                
-        
+    public boolean supprimercommande(commande t) {
+
         //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        String url = Statics.BASE_URL2 + "commande/deletecommandeJSON/"+t.getId_cmd();
+        String url = Statics.BASE_URL2 + "commande/deletecommandeJSON/" + t.getId_cmd();
 
         req.setUrl(url);
         req.setPost(false);
-        
+
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
@@ -108,6 +104,7 @@ public class commandeService {
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+
     public ArrayList<commande> parseCommandes(String jsonText) throws ParseException {
         try {
             commandes = new ArrayList<>();
@@ -125,7 +122,7 @@ public class commandeService {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // Specify the format of the date string
                 Date date = (Date) format.parse(dateString); // Parse the date string to a java.util.Date object
                 c.setDate_cmd(date);
-                c.setTotal( Float.parseFloat(obj.get("total").toString()));
+                c.setTotal(Float.parseFloat(obj.get("total").toString()));
                 c.setAdresse(obj.get("adresse").toString());
                 commandes.add(c);
             }
@@ -136,32 +133,31 @@ public class commandeService {
         return commandes;
     }
 
-  
-    public ArrayList<commande> getAllCommandes(){
-        String url = Statics.BASE_URL2+"commande/Allcommandes";
-               ConnectionRequest req=new ConnectionRequest(url);
+    public ArrayList<commande> getAllCommandes() {
+        String url = Statics.BASE_URL2 + "commande/Allcommandes";
+        ConnectionRequest req = new ConnectionRequest(url);
 
         req.setUrl(url);
         req.setPost(false);
-        
-            req.addResponseListener(new ActionListener<NetworkEvent>() {
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
             public void actionPerformed(NetworkEvent evt) {
 
                 try {
 
-                                        System.out.println(req.getResponseData());
+                    System.out.println(req.getResponseData());
 
                     commandes = parseCommandes(new String(req.getResponseData()));
-                    
+
                 } catch (ParseException ex) {
                     System.out.println("error in getting all commandes");
                 }
-                    req.removeResponseListener(this);
-                
+                req.removeResponseListener(this);
+
             }
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
-        return commandes ;
+        return commandes;
     }
 }

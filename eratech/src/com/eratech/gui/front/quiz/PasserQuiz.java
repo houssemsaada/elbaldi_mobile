@@ -12,6 +12,7 @@ import com.codename1.ui.util.ImageIO;
 import com.codename1.ui.util.Resources;
 import com.eratech.entities.Question;
 import com.eratech.entities.Quiz;
+import com.eratech.gui.utilisateur.SessionManager;
 import com.eratech.services.QuestionService;
 import com.eratech.utils.Statics;
 
@@ -173,13 +174,13 @@ if (score == 5 || (score < 5 && score > 3)) {
     codePromo = "Elbaldi" + generatePromoCode();
 }
         if (score <2) {
-            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été échoué par"+" foulen foulani "+" avec un score de " + score + "/" + list);
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été échoué par"+SessionManager.getUserName()+" avec un score de " + score + "/" + list);
         } else if (score ==5)  {
            
-            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés  par"+" foulen foulani "+"avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo :  " + codePromo);
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés  par"+SessionManager.getUserName()+"avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo :  " + codePromo);
           }   else if (score < 5 && score >3)  {
                      
-            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés par"+" foulen foulani "+" avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo : " + codePromo);
+            btnPartager.setTextToShare(currentQuiz.toString() + "\n Ce quiz a été passé avec succés par"+SessionManager.getUserName()+" avec un score de " + score + "/" + list+ ". Vous avez obtenu ce codePromo : " + codePromo);
                      }
        
 

@@ -1,25 +1,30 @@
 package com.eratech.gui.back;
 
+import com.codename1.io.Storage;
 import com.codename1.ui.*;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.eratech.gui.Login;
+import com.eratech.gui.uikit.SignInForm;
+import com.eratech.gui.utilisateur.SessionManager;
 
 public class AccueilBack extends Form {
 
     Resources theme = UIManager.initFirstTheme("/theme");
+    Resources res ; 
     Label label;
     Form previous;
     public static Form accueilForm;
 
-    public AccueilBack(Form previous) {
-        super("Menu", new BoxLayout(BoxLayout.Y_AXIS));
-        this.previous = previous;
-        accueilForm = this;
-        addGUIs();
-    }
+public AccueilBack(Resources res) {
+    super("Menu", new BoxLayout(BoxLayout.Y_AXIS));
+    this.accueilForm = this;
+    this.res = res;
+    addGUIs();
+}
+
 
     private void addGUIs() {
         label = new Label("Espace administrateur"/*MainApp.getSession().getEmail()*/);
@@ -29,11 +34,21 @@ public class AccueilBack extends Form {
         btnDeconnexion.addActionListener(action -> {
             Login.loginForm.showBack();
         });
+        Button logoutbtn = new Button();
+                logoutbtn.setMaterialIcon(FontImage.MATERIAL_ARROW_BACK_IOS);
+
+          logoutbtn.addActionListener(action -> {
+            new SignInForm(theme).show();
+            SessionManager.pref.clearAll();
+            Storage.getInstance().clearStorage();
+            Storage.getInstance().clearCache();
+            System.out.println(SessionManager.getEmail());
+        });
 
         Container userContainer = new Container(new BorderLayout());
         userContainer.setUIID("userContainer");
         userContainer.add(BorderLayout.CENTER, label);
-        userContainer.add(BorderLayout.EAST, btnDeconnexion);
+//        userContainer.add(BorderLayout.WEST, logoutbtn);
 
         Container menuContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         menuContainer.addAll(
@@ -44,8 +59,9 @@ public class AccueilBack extends Form {
                 makeQuizsButton(),
                  makeBonplansButton(),
                 makeReservationsButton(),
-                 makeCommandesButton()
-
+                 makeCommandesButton(),
+                 makeEventButton(),
+                makelogoutButton()
                  
 
         );
@@ -107,5 +123,22 @@ public class AccueilBack extends Form {
         button.addActionListener(action -> new com.eratech.gui.commande.AfficherCommandeForm(this).show());
         return button;
     }
-
+     private Button makeEventButton() {
+        Button button = new Button("Evenement");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action -> new com.eratech.gui.event.AfficherEventBack(this).show());
+        return button;
+    }
+       private Button makelogoutButton() {
+        Button button = new Button("Logout");
+        button.setUIID("buttonMenu");
+        //button.setMaterialIcon(FontImage.MATERIAL_BOOKMARK);
+        button.addActionListener(action ->  new com.eratech.gui.utilisateur.SignInForm(theme).show());
+            SessionManager.pref.clearAll();
+            Storage.getInstance().clearStorage();
+            Storage.getInstance().clearCache();
+        return button;
+    }
+           
 }

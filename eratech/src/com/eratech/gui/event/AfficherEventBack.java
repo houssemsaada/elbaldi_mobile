@@ -22,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author selim
  */
-public class AfficherEvent extends Form {
+public class AfficherEventBack extends Form {
      Form previous;
 
     public static Event currentEvent = null;
@@ -30,7 +30,7 @@ public class AfficherEvent extends Form {
 
     ArrayList<Component> componentModels;      
     
-     public AfficherEvent(Form previous) {
+     public AfficherEventBack(Form previous) {
         super(new BoxLayout(BoxLayout.Y_AXIS));
         this.previous = previous;
 

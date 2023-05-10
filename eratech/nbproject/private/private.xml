@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/utils/AlertUtils.java</file>
-            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/utils/DateUtils.java</file>
-            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/front/quiz/PasserQuiz.java</file>
-            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/front/quiz/AfficherToutQuiz.java</file>
-            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/back/question/AfficherToutQuestion.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/uikit/BaseForm.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/event/AjouterEvent.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/back/AccueilBack.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/event/AfficherEventBack.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/commande/AjouterCommandeForm.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/gui/event/AfficherEvent.java</file>
+            <file>file:/C:/Users/selim/Downloads/eratech-quiz-cn1%20(1)/eratech/src/com/eratech/services/ServiceUtilisateur.java</file>
         </group>
     </open-files>
 </project-private>

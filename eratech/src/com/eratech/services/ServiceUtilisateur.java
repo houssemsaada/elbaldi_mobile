@@ -13,6 +13,7 @@ import com.codename1.ui.ComboBox;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
 import com.codename1.ui.util.Resources;
+import com.eratech.gui.back.AccueilBack;
 import com.eratech.gui.utilisateur.ProfileForm;
 import com.eratech.gui.utilisateur.SessionManager;
 
@@ -99,16 +100,17 @@ public class ServiceUtilisateur {
                 if (json.equals("failed")) {
                     Dialog.show("Echec d'authentification", "Username ou mot de passe éronné", "OK", null);
                 } else {
+
                     System.out.println("data ==" + json);
                     Map<String, Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
 
                     //Session jibt id ta3 user ly3ml login w sajltha fi session ta3i
                     float id = Float.parseFloat(user.get("idUser").toString());
                     int idAsInt = (int) id;
-                                        System.out.println("the id is : " + idAsInt);
+                    System.out.println("the id is : " + idAsInt);
 
                     SessionManager.setId((int) idAsInt);
-                    System.out.println(SessionManager.getId()+"this is the id of the session");
+                    System.out.println(SessionManager.getId() + "this is the id of the session");
                     SessionManager.setUserName(user.get("nom").toString());
                     SessionManager.setEmail(user.get("email").toString());
 
@@ -116,7 +118,14 @@ public class ServiceUtilisateur {
 
                     if (user.size() > 0) // l9a user
                     {
-                        new ProfileForm(rs).show();
+                        if (user.get("email").toString().equals("admin@admin.com") ) {
+                            System.out.println("aaaaaaaaaaaaaaaa" + user.get("email").toString());
+
+                            new AccueilBack(rs).show();
+                        } else {
+
+                            new ProfileForm(rs).show();
+                        }
                     }
                     System.out.println("welcome");
 

@@ -16,7 +16,6 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
  */
-
 package com.eratech.gui.uikit;
 
 import com.codename1.components.ScaleImageLabel;
@@ -33,6 +32,8 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.eratech.gui.commande.AjouterCommandeForm;
+import com.eratech.gui.event.AfficherEvent;
 import com.eratech.gui.front.bonplan.AfficherToutBonplan;
 import com.eratech.gui.front.categorie.AfficherToutCategorie;
 import com.eratech.gui.front.produit.AfficherToutProduit;
@@ -56,14 +57,13 @@ public class BaseForm extends Form {
     public BaseForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
-    
-    
+
     public Component createLineSeparator() {
         Label separator = new Label("", "WhiteSeparator");
         separator.setShowEvenIfBlank(true);
         return separator;
     }
-    
+
     public Component createLineSeparator(int color) {
         Label separator = new Label("", "WhiteSeparator");
         separator.getUnselectedStyle().setBgColor(color);
@@ -72,25 +72,25 @@ public class BaseForm extends Form {
         return separator;
     }
 
-       protected void addSideMenu(Resources res) {
+    protected void addSideMenu(Resources res) {
         Toolbar tb = getToolbar();
-       
-       
-        tb.addComponentToSideMenu(LayeredLayout.encloseIn(
-     
-        ));
-        
+
+        tb.addComponentToSideMenu(LayeredLayout.encloseIn());
+
         tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
         tb.addMaterialCommandToSideMenu("Produit", FontImage.MATERIAL_ARCHIVE, e -> new AfficherToutProduit(res, null).show());
         tb.addMaterialCommandToSideMenu("Categorie", FontImage.MATERIAL_CATEGORY, e -> new AfficherToutCategorie(res).show());
-        tb.addMaterialCommandToSideMenu("Bonplan", FontImage.MATERIAL_ADD_SHOPPING_CART, e -> new AfficherToutBonplan(res).show()); 
+        tb.addMaterialCommandToSideMenu("Bonplan", FontImage.MATERIAL_ADD_SHOPPING_CART, e -> new AfficherToutBonplan(res).show());
         tb.addMaterialCommandToSideMenu("Quiz", FontImage.MATERIAL_QUIZ, e -> new AfficherToutQuiz(res).show());
+        tb.addMaterialCommandToSideMenu("Commande", FontImage.MATERIAL_ADD_SHOPPING_CART, e -> new AjouterCommandeForm(this).show());
+        tb.addMaterialCommandToSideMenu("Evenement", FontImage.MATERIAL_QUIZ, e -> new AfficherEvent(this).show());
+
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> {
-        new SignInForm(res).show();
-        SessionManager.pref.clearAll();
+            new SignInForm(res).show();
+            SessionManager.pref.clearAll();
             Storage.getInstance().clearStorage();
             Storage.getInstance().clearCache();
-            System.out.println(SessionManager.getEmail());            
+            System.out.println(SessionManager.getEmail());
         });
     }
 }

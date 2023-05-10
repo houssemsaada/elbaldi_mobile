@@ -54,7 +54,7 @@ public class AjouterEvent extends Form {
                         p.setTitle_event(Titre.getText());
 
                         if (EventService.getInstance().addcommande(p)) {
-                            Dialog.show("Success", "commande ajoutée ", new Command("OK"));
+                            Dialog.show("Success", "evenement ajoutée ", new Command("OK"));
                         } else {
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         }
